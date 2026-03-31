@@ -2,8 +2,6 @@
 
 This tool helps you audit your AWS IAM roles to identify overly permissive policies that could pose a security risk to your account.
 
-## How to use it
-
 1. Make sure you have your AWS credentials configured (e.g., via `aws configure` or environment variables).
 2. Run the script from your terminal:
    ```bash
@@ -13,7 +11,6 @@ This tool helps you audit your AWS IAM roles to identify overly permissive polic
    - **Option 1**: Scan every IAM role in your AWS account. You will need to provide your Account ID for verification.
    - **Option 2**: Scan one specific IAM role by entering its name.
 
-## What it looks for
 
 The script checks for common security misconfigurations, such as:
 - Policies that grant full administrative access (`AdministratorAccess` or `Admin`).

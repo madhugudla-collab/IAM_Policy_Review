@@ -111,10 +111,7 @@ class IAM_Policy_Auditor_class:
                         print("-" * 60)
                         print(" Follow the principle of least privilege and restrict access to only required resources.")
                         print(" If you have a valid business justification, please reach out to your Security/AppSec Engineer for review.")
-                        print("-" * 60 + "\n")
-
-
-                                                  
+                        print("-" * 60 + "\n")                                         
         except Exception as e:
                 print(f"unexpected error document {e}")
 
@@ -122,11 +119,6 @@ class IAM_Policy_Auditor_class:
         
 
     def verify_account_access(self, target_account_id):
-        """
-        Verifies if the current AWS session matches the target Account ID.
-        """
-        try:
-            # Use STS to find out 'who' the current session is
             identity = self.sts_client.get_caller_identity()
             current_id = identity['Account']
             
@@ -137,27 +129,15 @@ class IAM_Policy_Auditor_class:
                 print(f" MISMATCH: You are logged into {current_id}, "
                       f"but you entered {target_account_id}.")
                 return False
-        except Exception as e:
-            print(f"Verification Error: {e}")
             return False
     
     def list_all_roles(self):
-        """
-        Fetches IAM roles in the account (up to 1,000 roles).
-        """
-        try:
-            # list_roles returns a dictionary containing 'Roles' and 'IsTruncated'
-            response = self.iam_client.list_roles(MaxItems=1000)
+         
+            response = self.iam_client.list_roles(MaxItems=500)
             return response.get('Roles', [])
-        except Exception as e:
-            print(f"Error listing roles: {e}")
             return []
-
-
-        
-
-
-
+    
+    
 if __name__ == "__main__":
     policy_audit = IAM_Policy_Auditor_class()
       
